@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+
+import Header from './component/Header/Header';
+import Footer from './component/Footer/Footer';
+import Home from './containers/Home/Home'
+import { Route, Routes } from 'react-router-dom';
+import Departments from './containers/Department/Departments';
+import Doctors from './containers/Doctor/Doctors';
+import About from './containers/About/About';
+import Contact from './containers/Contact/Contact';
+import Appointment from './containers/Appointment/Appointment';
+import Auth from './containers/Auth/Auth';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Routes>
+
+        <Route exact path="/" element={<Home/>} />
+        <Route exact path='/departments' element={<Departments />} />
+        <Route exact path='/doctore'element={<Doctors/>}/>
+        <Route exact path='/about' element={<About/>}/>
+        <Route exact path='/contact' element={<Contact/>}/>
+        <Route exact path='/appointment' element={<Appointment/>}/>
+        <Route exact path='/auth' element={<Auth/>}/>
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
