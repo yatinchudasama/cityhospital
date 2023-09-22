@@ -544,16 +544,16 @@ section {
   margin-top: 10px;
 }
 
-.section-title h2 {
+/* .section-title h2 {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
   color: #2c4964;
-}
+} */
 
-.section-title h2::before {
+/* .section-title h2::before {
   content: '';
   position: absolute;
   display: block;
@@ -562,9 +562,9 @@ section {
   background: #ddd;
   bottom: 1px;
   left: calc(50% - 60px);
-}
+} */
 
-.section-title h2::after {
+/* .section-title h2::after {
   content: '';
   position: absolute;
   display: block;
@@ -573,7 +573,7 @@ section {
   background: #FF6337;
   bottom: 0;
   left: calc(50% - 20px);
-}
+} */
 
 .section-title p {
   margin-bottom: 0;
@@ -1062,26 +1062,26 @@ section {
   margin-top:40px ;
 }
 
-.appointment .php-email-form input, .appointment .php-email-form textarea, .appointment .php-email-form select {
+/* .appointment .php-email-form input, .appointment .php-email-form textarea, .appointment .php-email-form select {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
   padding: 10px !important;
-}
+} */
 
-.appointment .php-email-form input:focus, .appointment .php-email-form textarea:focus, .appointment .php-email-form select:focus {
+/* .appointment .php-email-form input:focus, .appointment .php-email-form textarea:focus, .appointment .php-email-form select:focus {
   border-color: #FF6337;
-}
+} */
 
-.appointment .php-email-form input, .appointment .php-email-form select {
+/* .appointment .php-email-form input, .appointment .php-email-form select {
   height: 44px;
-}
+} */
 
 .appointment .php-email-form textarea {
   padding: 10px 12px;
 }
 
-.appointment .php-email-form button[type="submit"] {
+/* .appointment .php-email-form button[type="submit"] {
   background: #FF6337;
   border: 0;
   padding: 10px 35px;
@@ -1092,7 +1092,7 @@ section {
 
 .appointment .php-email-form button[type="submit"]:hover {
   background: #1c84e3;
-}
+} */
 
 /*--------------------------------------------------------------
 # Departments
@@ -1188,12 +1188,12 @@ section {
   padding-left: 30px;
 }
 
-.doctors .member h4 {
+/* .doctors .member h4 {
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 20px;
   color: #2c4964;
-}
+} */
 
 .doctors .member span {
   display: block;
@@ -1357,12 +1357,12 @@ section {
   left: -45px;
 }
 
-.testimonials .testimonial-item h3 {
+/* .testimonials .testimonial-item h3 {
   font-size: 18px;
   font-weight: bold;
   margin: 10px 0 5px 0;
   color: #111;
-}
+} */
 
 .testimonials .testimonial-item h4 {
   font-size: 14px;

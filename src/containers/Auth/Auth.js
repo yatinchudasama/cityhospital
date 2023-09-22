@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Basebutton } from '../../component/UI/Button/Button.style';
+import Button from '../../component/UI/Button/Button';
+import { InputBox } from '../../component/UI/Inpurbox/Inputbox.style';
 
 function Auth(props) {
 
@@ -31,21 +33,21 @@ function Auth(props) {
                         <div className="row  justify-content-center">
                             {
                                 type === 'signup' ? <div className="col-md-8 form-group">
-                                    <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    <InputBox type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
 
                                 </div>
                                     : ''
                             }
 
                             <div className="col-md-8 form-group mt-3 mt-md-0">
-                                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                <InputBox type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
 
                             </div>
 
                             {
                                 type === 'login' || type === 'signup' ? <div className="col-md-8 form-group mt-3 mt-md-0">
 
-                                    <input type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    <InputBox type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
 
                                 </div>
                                     : null
@@ -55,8 +57,9 @@ function Auth(props) {
                         </div>
                         <div className="text-center">
                             {
-                                type === 'login' ? <Basebutton  type="submit">Login</Basebutton> :
-                                    type === 'signup' ? <Basebutton btntype= 'secondry' type="submit">Signup</Basebutton> : <Basebutton btntype= 'outline' type="submit">Submit</Basebutton>
+                                type === 'login' ? <Button type="submit" disabled={true}>Login</Button> :
+                                    type === 'signup' ? <Button btntype='secondry' type="submit" btndisabled={true}>Signup</Button> : <Button btntype='outline' type="submit">Submit</Button>
+                                    
 
                             }
 

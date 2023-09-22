@@ -1,8 +1,10 @@
 import React from 'react';
 import { Basebutton } from './Button.style';
-
-function Button({children, btntype= 'primary', ...rest}) {
-
+import { primary } from './Button.style';
+import { secondry } from './Button.style';
+import { outline } from './Button.style';
+function Button({children, btntype= 'primary',btndisabled=false, ...rest}) {
+    
     const CheckButton = () => {
         switch (btntype) {
             case 'primary':
@@ -19,8 +21,8 @@ function Button({children, btntype= 'primary', ...rest}) {
     return (
        
             <>
-                <CustomButtom {...rest}>
-                <children/>
+                <CustomButtom disabled ={btndisabled} {...rest}>
+                 {children}
                 </CustomButtom>
             </>
         

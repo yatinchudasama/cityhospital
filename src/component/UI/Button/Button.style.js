@@ -1,24 +1,35 @@
 import styled from "styled-components";
 
- export const  Basebutton = styled.button`
-    background: #FF6337;
+ const Basebutton = styled.button`
+  
     border: 0;
     padding: 10px 35px;
-    color: #fff;
+   
     transition: 0.4s;
     border-radius: 50px;
+    cursor :pointer
 `
 export const primary = styled(Basebutton)`
-background: #FF6337;
+background:  ${props =>props.disabled ? 'gray' : '#FF6337'};
 color: #fff;
+&:hover{
+    background:  ${props =>props.disabled ? 'gray' : 'blue'};
+}
 `
 
 export const secondry = styled(Basebutton)`
-background: #0000;
-color: #fff;
+background: ${props =>props.disabled ? 'gray' : ' #000'};
+color: white;
+&:hover{
+    background: ${props =>props.disabled ? 'gray' : 'blue'};
+}
 `
 
 export const outline = styled(Basebutton)`
-background: none;
-color: #0000;
+background: gray;
+border: 2px solid black;
+color: #000;
+&:hover{
+    background: blue;
+}
 `

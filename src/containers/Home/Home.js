@@ -1,4 +1,6 @@
 import React from 'react';
+import { Heading } from '../../component/UI/Heading/Heading';
+import {Heading2 } from '../../component/UI/Heading/Heading';
 
 function Home(props) {
     return (
@@ -48,7 +50,7 @@ function Home(props) {
             <section id="services" className="services">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Our Facilities</h2>
+                        <Heading>Our Facilities</Heading>
                         <p>Nunc aliquam eget nibh eu euismod. Donec dapibus blandit quam volutpat sollicitudin. Fusce tincidunt sit
                             amet ex in volutpat. Donec lacinia finibus tortor. Curabitur luctus eleifend odio. Phasellus placerat mi et
                             suscipit pulvinar. Donec quis tristique lectus.</p>
@@ -101,14 +103,14 @@ function Home(props) {
             </section>
             <section id="testimonials" className="testimonials">
                 <div className="container">
-                    <div className="section-title"><h2>Reviews</h2></div>
+                    <div className="section-title"><Heading>Reviews</Heading></div>
                     <div className="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="swiper-wrapper">
                             <div className="swiper-slide">
                                 <div className="testimonial-wrap">
                                     <div className="testimonial-item">
                                         <img src="assets/img/testimonials/testimonials-1.jpg" className="testimonial-img" alt />
-                                        <h3>Jacob Wilsson</h3>
+                                        <Heading2>Jacob Wilsson</Heading2>
                                         <h4>Writer</h4>
                                         <p>
                                             <i className="bx bxs-quote-alt-left quote-icon-left" />
@@ -193,7 +195,7 @@ function Home(props) {
             <section id="gallery" className="gallery">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Gallery</h2>
+                        <Heading>Gallery</Heading>
                         <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
                             consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
                             in iste officiis commodi quidem hic quas.</p>

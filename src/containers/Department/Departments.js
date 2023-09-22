@@ -1,4 +1,6 @@
 import React from 'react';
+import { Heading } from '../../component/UI/Heading/Heading';
+import { Heading2 } from '../../component/UI/Heading/Heading';
 
 function Departments(props) {
     return (
@@ -6,7 +8,7 @@ function Departments(props) {
             <section id="departments" className="departments">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Departments</h2>
+                        <Heading>Departments</Heading>
                     </div>
                     <div className="row">
                         <div className="col-lg-3">
@@ -33,7 +35,7 @@ function Departments(props) {
                                 <div className="tab-pane active show" id="tab-1">
                                     <div className="row">
                                         <div className="col-lg-8 details order-2 order-lg-1">
-                                            <h3>E.N.T</h3>
+                                            <Heading2>E.N.T</Heading2>
                                             <p className="fst-italic">Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere
                                                 hendrerit. Donec iaculis nisi ut purus dapibus</p>
                                             <p>Vivamus nisi mauris, blandit quis sem sit amet, posuere blandit diam. Cras quis quam suscipit,
