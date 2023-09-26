@@ -1,4 +1,5 @@
 import React from 'react';
+import { Heading } from '../../component/UI/Heading/Heading';
 
 function Contact(props) {
     return (
@@ -6,7 +7,7 @@ function Contact(props) {
             <section id="contact" className="contact">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Contact</h2>
+                        <Heading>Contact</Heading>
                         <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                             blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus
                             quis,
