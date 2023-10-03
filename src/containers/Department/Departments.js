@@ -1,6 +1,7 @@
 import React from 'react';
 import { Heading } from '../../component/UI/Heading/Heading';
 import { Heading2 } from '../../component/UI/Heading/Heading';
+import { Link } from 'react-router-dom';
 
 function Departments(props) {
     return (
@@ -9,6 +10,9 @@ function Departments(props) {
                 <div className="container">
                     <div className="section-title">
                         <Heading>Departments</Heading>
+                        <Link to={"/department1"}>Department1</Link>
+                        <Link to={"/department2"}>Department2</Link>
+                        <Link to={"/department3"}>Department3</Link>
                     </div>
                     <div className="row">
                         <div className="col-lg-3">

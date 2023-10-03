@@ -4,10 +4,10 @@ import { useFormik } from 'formik';
 
 function Appointment(props) {
 
-    let d= new Date();
+    let d = new Date();
     // console.log(d);
     let nd = new Date()
-    nd.setDate(d.getDate()-1);
+    nd.setDate(d.getDate() - 1);
     // console.log(nd);
 
     let appointmentSchema = yup.object().shape({
@@ -17,18 +17,26 @@ function Appointment(props) {
         date: yup.date().required("please enter date").min(nd, 'please enter valid sate'),
         department: yup.string().required("please enter department"),
         message: yup
-        .string()
-        .required("please enter message")
-        .matches(/[.*+?^${}()|[\]\\]/g, "plase enter valid message")
-        .test("message", "max 5 word allow", function(arr) {
-            if(arr.length <=5){
-                return true;
-            } else{
-                return false;
-            }
-        })
+            .string()
+            .required("please enter message")
+            .matches(/[.*+?^${}()|[\]\\]/g, "plase enter valid message")
+            .test("message", "max 5 word allow", function (arr) {
+                if (arr.length <= 5) {
+                    return true;
+                } else {
+                    
+                    return false;
+                }
+            })
         ,
         file: yup.string().required("please enter file")
+            .test("file", "max 2 mb allow", function (file) {
+                if (file.length <= 2000 && file.type === '') {
+                    return true
+                } else {
+                    return false
+                }
+            })
 
     })
 
@@ -46,13 +54,15 @@ function Appointment(props) {
 
         validationSchema: appointmentSchema,
         onSubmit: values => {
-            
+
             let arr = values.message.split(" ")
             console.log(arr);
 
-            // let res = arr.map((v) => {
-            //     arr.toUpperCase().
-            // })
+            let newarr = arr.map((v) =>
+                v[0].toUpperCase() + v.substring(1)
+           )
+
+            console.log(newarr.join(" "));
 
         },
 
@@ -84,7 +94,7 @@ function Appointment(props) {
                                     onBlur={handleBlur}
                                 />
                                 {errors.name && touched.name ? <span>{errors.name}</span> : null}
-                               
+
 
                             </div>
                             <div className="col-md-4 form-group mt-3 mt-md-0">
@@ -102,7 +112,7 @@ function Appointment(props) {
                                 />
                                 {errors.email && touched.email ? <span>{errors.email}</span> : null}
 
-                               
+
                             </div>
                             <div className="col-md-4 form-group mt-3 mt-md-0">
                                 <input type="tel"
@@ -118,7 +128,7 @@ function Appointment(props) {
                                     onBlur={handleBlur}
                                 />
                                 {errors.phone && touched.phone ? <span>{errors.phone}</span> : null}
-                               
+
                             </div>
                         </div>
                         <div className="row">
@@ -136,7 +146,7 @@ function Appointment(props) {
                                     onBlur={handleBlur}
                                 />
                                 {errors.date && touched.date ? <span>{errors.date}</span> : null}
-                               
+
                             </div>
                             <div className="col-md-4 form-group mt-3">
                                 <select name="department" id="department" className="form-select"
@@ -150,19 +160,19 @@ function Appointment(props) {
 
                                 </select>
                                 {errors.department && touched.department ? <span>{errors.department}</span> : null}
-                               
+
                             </div>
 
                             <div className="col-md-4 form-group mt-3">
-                                <input type='file' 
-                                name='file'
-                                
-                                values={values.file}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
+                                <input type='file'
+                                    name='file'
+
+                                    values={values.file}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
                                 />
-                                 {errors.file && touched.file ? <span>{errors.file}</span> : null}
-                              
+                                {errors.file && touched.file ? <span>{errors.file}</span> : null}
+
                             </div>
                         </div>
                         <div className="form-group mt-3">
@@ -178,7 +188,7 @@ function Appointment(props) {
                                 onBlur={handleBlur}
                             />
                             {errors.message && touched.message ? <span>{errors.message}</span> : null}
-                           
+
                         </div>
                         <div className="mb-3">
                             <div className="loading">Loading</div>

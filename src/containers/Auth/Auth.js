@@ -2,19 +2,75 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Basebutton } from '../../component/UI/Button/Button.style';
 import Button from '../../component/UI/Button/Button';
-import { InputBox } from '../../component/UI/Inpurbox/Inputbox.style';
+import { InputBox, InputError } from '../../component/UI/Inpurbox/Inputbox.style';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
+import { toBeEnabled } from '@testing-library/jest-dom/matchers';
 
 function Auth(props) {
 
     const [type, setType] = useState('login')
     // const [forget, setForget] = useState('forget')
+    let authobj, inival;
+    if (type === 'login') {
+        authobj = {
+            email: yup.string().email("please enter valid email").required("please enter email"),
+            phone: yup.string().required("please enter phone")
+        }
+        inival = {
+            email: '',
+            phone: ''
+        }
+    } else if (type === 'signup') {
+        authobj = {
+            name: yup.string().required("please enter name").matches(/^([a-zA-Z ]){2,30}$/, "plase enter valid name"),
+            email: yup.string().email("please enter valid email").required("please enter email"),
+            phone: yup.string().required("please enter phone"),
+            con_phone: yup.string().required("please enter confirm phone").test("con_phone", "confirm phonr", function (v) {
+                if (v === this.parent.phone) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+        }
+        inival = {
+            name: '',
+            email: '',
+            phone: '',
+            con_phone: ''
+        }
+    } else {
+        authobj = {
+            email: yup.string().email("please enter valid email").required("please enter email"),
+        }
+        inival = {
+            email: ''
+        }
+    }
 
-    const StyledButton = styled.button`
-        display: block;
-        padding: 8px 15px;
-        background-color: red; 
-        color: white;                                                                                 
-    `;
+    let authSchema = yup.object().shape(authobj);
+
+    const formikobj = useFormik({
+
+        initialValues: inival,
+
+        validationSchema: authSchema,
+        onSubmit: values => {
+            console.log(values);
+        },
+        enableReinitialize: true
+    })
+
+    const { handleChange, handleBlur, handleSubmit, errors, values, touched } = formikobj;
+    console.log(errors);
+
+    // const StyledButton = styled.button`
+    //     display: block;
+    //     padding: 8px 15px;
+    //     background-color: red; 
+    //     color: white;                                                                                 
+    // `;
     return (
         <main>
             <section id="appointment" className="appointment">
@@ -29,26 +85,72 @@ function Auth(props) {
 
 
                     </div>
-                    <form action method="post" role="form" className="php-email-form">
+                    <form onSubmit={handleSubmit} role="form" className="php-email-form">
                         <div className="row  justify-content-center">
                             {
                                 type === 'signup' ? <div className="col-md-8 form-group">
-                                    <InputBox type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-
+                                    <InputBox
+                                        type="text"
+                                        name="name"
+                                        className="form-control"
+                                        id="name"
+                                        placeholder="Your Name"
+                                        value={values.name}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        errorText={errors.name && touched.name ? <span>{errors.name}</span> : ''}
+                                    />
+                                        {errors.name && touched.name ? <InputError>{errors.name}</InputError> : null}
                                 </div>
                                     : ''
                             }
 
                             <div className="col-md-8 form-group mt-3 mt-md-0">
-                                <InputBox type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-
+                                <InputBox
+                                    type="email"
+                                    className="form-control"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Your Email"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                                {errors.email && touched.email ? <span>{errors.email}</span> : null}
                             </div>
 
                             {
                                 type === 'login' || type === 'signup' ? <div className="col-md-8 form-group mt-3 mt-md-0">
 
-                                    <InputBox type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    <InputBox
+                                        type="tel"
+                                        className="form-control"
+                                        name="phone"
+                                        id="phone"
+                                        placeholder="Your Phone"
+                                        value={values.phone}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.phone && touched.phone ? <span>{errors.phone}</span> : null}
+                                </div>
+                                    : null
+                            }
 
+                            {
+                                type === 'signup' ? <div className="col-md-8 form-group mt-3 mt-md-0">
+
+                                    <InputBox
+                                        type="tel"
+                                        className="form-control"
+                                        name="con_phone"
+                                        id="con_phone"
+                                        placeholder="Your confirm Phone"
+                                        value={values.con_phone}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.con_phone && touched.con_phone ? <span>{errors.con_phone}</span> : null}
                                 </div>
                                     : null
                             }
@@ -57,9 +159,9 @@ function Auth(props) {
                         </div>
                         <div className="text-center">
                             {
-                                type === 'login' ? <Button type="submit" disabled={true}>Login</Button> :
-                                    type === 'signup' ? <Button btntype='secondry' type="submit" btndisabled={true}>Signup</Button> : <Button btntype='outline' type="submit">Submit</Button>
-                                    
+                                type === 'login' ? <Button type="submit" >Login</Button> :
+                                    type === 'signup' ? <Button btntype='secondry' type="submit" >Signup</Button> : <Button btntype='outline' type="submit">Submit</Button>
+
 
                             }
 

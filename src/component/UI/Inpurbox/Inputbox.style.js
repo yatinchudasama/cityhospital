@@ -13,6 +13,8 @@ padding: 10px !important;
     border-color: #FF6337;
     box-shadow: none;
 }
+`
 
-
+export const InputError = styled.span`
+    color: red;
 `
