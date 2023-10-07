@@ -8,7 +8,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import * as yup from 'yup'
 import { useFormik } from 'formik';
 import { useParams } from 'react-router-dom';
@@ -17,15 +16,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 
-export default function Medisin() {
+export default function Doctor() {
     const [open, setOpen] = React.useState(false);
 
     const [mData, setMData] = useState([])
-    const [updte, setUpdate] = useState(false)
-  
+    const [update, setUpdate] = useState(false)
 
-    useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("medisin"));
+
+    React.useEffect(() => {
+        let localData = JSON.parse(localStorage.getItem("doctor"));
         if (localData) {
             setMData(localData);
         }
@@ -39,104 +38,117 @@ export default function Medisin() {
         setOpen(false);
     };
 
-    var d = new Date();
-    let nd = Date(d.setDate(d.getDate() - 1))
 
-    let medisinesSchema = yup.object().shape({
-        name: yup.string().required("please enter name"),
-        price: yup.number().required("please enter price"),
 
-        date: yup.date().required("please enter date").min(nd, 'please enter valid sate'),
+    let doctorSchema = yup.object().shape({
+        name: yup.string().required("please enter name").matches(/^([a-zA-Z ]){2,30}$/, "plase enter valid name"),
+        desc: yup.string().required("please enter desc").test("desc", "max 20 allow", (values) => {
+            if (values.length <= 20) {
+                return true
+            } else {
+                return false
+            }
+        }),
+        designation: yup.string().required("please enter designation").matches(/^([a-zA-Z ]){2,30}$/, "plase enter valid designation"),
+        url: yup.string().required("please enter name"),
+
+
 
     })
 
     const handleUpdate = (data) => {
-        console.log(data);
-        let localData = JSON.parse(localStorage.getItem("medisin"));
+
+       
+        let localData = JSON.parse(localStorage.getItem("doctor"));
 
         let index = localData.findIndex((v) => v.id == data.id)
         console.log(index);
 
         localData[index] = data;
 
-        localStorage.setItem("medisin", JSON.stringify(localData))
+        localStorage.setItem("doctor", JSON.stringify(localData))
         setMData(localData)
 
         setUpdate(false)
+
     }
 
-    const Tabledata = (data) => {
+    const Doctordata = (data) => {
         console.log(data);
-        let localData = JSON.parse(localStorage.getItem("medisin"));
+        let localData = JSON.parse(localStorage.getItem("doctor"));
         let id = Math.floor(Math.random() * 1000)
         if (localData) {
             localData.push({ id: id, ...data });
-            localStorage.setItem("medisin", JSON.stringify(localData))
+            localStorage.setItem("doctor", JSON.stringify(localData))
             setMData(localData)
             // console.log(localData);
         } else {
-            localStorage.setItem("medisin", JSON.stringify([{ id, ...data }]))
+            localStorage.setItem("doctor", JSON.stringify([{ id, ...data }]))
             setMData([{ id, ...data }])
         }
     }
-    // Tabledata();
+
 
     const formikobj = useFormik({
 
         initialValues: {
             name: '',
-            price: '',
-            date: '',
+            desc: '',
+            designation: '',
+            url: ''
 
         },
 
-        validationSchema: medisinesSchema,
-        onSubmit:(values,action)  => {
-            // console.log(values);
-   
-            if(updte){
-                handleUpdate(values);
-            }else{
-                handleUpdate(values);
+        validationSchema: doctorSchema,
+        onSubmit: (values, action) => {
+            console.log(values);
+
+            if (update) {
+                handleUpdate(values)
+            } else {
+                handleUpdate(values)
             }
-            Tabledata(values)
+            Doctordata(values);
             action.resetForm();
+            handleClose()
         },
 
     })
 
-    const { handleSubmit, handleChange, handleBlur, errors, values, touched } = formikobj;
-  
+    const { handleSubmit, handleChange, handleBlur, errors, values, touched, setValues } = formikobj;
+    console.log(values);
+
     const handleEdit = (data) => {
         // console.log(data);
         handleClickOpen();
-
+        setValues(data);
         setMData(data)
         setUpdate(true)
     }
 
     const handleDelete = (id) => {
         // console.log(id);
-        let localData = JSON.parse(localStorage.getItem("medisin"));
+        let localData = JSON.parse(localStorage.getItem("doctor"));
 
-        let fData = localData.filter((v) => v.id == id)
+        let Ddata = localData.filter((v) => v.id !== id)
 
-        localStorage.setItem("medisin", JSON.stringify(fData))
-        setMData(fData)
+        localStorage.setItem("doctor", JSON.stringify(Ddata))
+        setMData(Ddata)
 
     }
 
     const columns = [
         { field: 'name', headerName: 'Name', width: 70 },
-        { field: 'price', headerName: 'Price', width: 130 },
-        { field: 'date', headerName: 'date', width: 130 },
+        { field: 'desc', headerName: 'Desc', width: 130 },
+        { field: 'designation', headerName: 'Designation', width: 130 },
+        { field: 'url', headerName: 'Url', width: 130 },
         {
             field: 'Action', headerName: 'Action',
 
             renderCell: (params) => (
                 <>
                     <IconButton aria-label="delete" onClick={() => handleEdit(params.row)}>
-                        <EditIcon/>
+                        <EditIcon />
                     </IconButton>
 
                     <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
@@ -163,7 +175,7 @@ export default function Medisin() {
                         will send updates occasionally.
                     </DialogContentText>
                     <TextField
-                        autoFocus
+                        
                         margin="dense"
                         id="name"
                         name="name"
@@ -177,34 +189,49 @@ export default function Medisin() {
                     />
                     {errors.name && touched.name ? <span>{errors.name}</span> : null}
                     <TextField
-                        autoFocus
+                        
                         margin="dense"
-                        id="price"
-                        name="price"
-                        label="Price"
+                        id="desc"
+                        name="desc"
+                        label="desc"
                         type="text"
                         fullWidth
                         variant="standard"
-                        value={values.price}
+                        value={values.desc}
                         onChange={handleChange}
                         onBlur={handleBlur}
 
                     />
-                    {errors.price && touched.price ? <span>{errors.price}</span> : null}
+                    {errors.desc && touched.desc ? <span>{errors.desc}</span> : null}
                     <TextField
-                        autoFocus
+                        
                         margin="dense"
-                        id="date"
-                        name="date"
-                        label="date"
-                        type="date"
+                        id="designation"
+                        name="designation"
+                        label="designation"
+                        type="text"
                         fullWidth
                         variant="standard"
-                        value={values.date}
+                        value={values.designation}
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
-                    {errors.date && touched.date ? <span>{errors.date}</span> : null}
+                    {errors.designation && touched.designation ? <span>{errors.designation}</span> : null}
+
+                    <TextField
+                        
+                        margin="dense"
+                        id="url"
+                        name="url"
+                        label="url"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        value={values.url}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                    {errors.url && touched.url ? <span>{errors.url}</span> : null}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

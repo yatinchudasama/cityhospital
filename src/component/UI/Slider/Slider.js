@@ -13,6 +13,9 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination } from 'swiper/modules';
+import { Link } from 'react-router-dom';
+import Profile from '../../../containers/Home/Review';
+import Review from '../../../containers/Home/Review';
 
 function Slider(props) {
 
@@ -58,8 +61,8 @@ function Slider(props) {
                                 spaceBetween: 50,
                             },
                         }}
-                        modules={[Pagination]}
-                        className="mySwiper"
+                    // modules={[Pagination]}
+                    // className="mySwiper"
                     >
 
                         {
@@ -67,8 +70,12 @@ function Slider(props) {
                             rData.map((v) => {
                                 return (
                                     <SwiperSlide>
-                                        {v.id}
-                                        {v.name}
+                                        <Link to={"/review-detail/" + v.id}>
+                                            {/* <Profile data={v.name}/> */}
+                                            <Review data={v.name} />
+                                            {v.id}
+                                            {v.name}
+                                        </Link>
                                     </SwiperSlide>
                                 )
                             })
@@ -77,7 +84,7 @@ function Slider(props) {
 
                     </Swiper>
 
-                    .
+
 
 
 

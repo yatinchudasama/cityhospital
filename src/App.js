@@ -9,12 +9,12 @@ import Adminroute from './routes/Adminroute';
 function App() {
   return (
     <>
-      <Header />
+
       <Routes>
-        <Route exact path="/*" element={<Userroute/>} />
-        <Route exact path="/admin/*" element={<Adminroute/>} />
+        <Route exact path="/*" element={<Userroute />} />
+        <Route exact path="/admin/*" element={<Adminroute />} />
       </Routes>
-      <Footer />
+
     </>
   );
 }

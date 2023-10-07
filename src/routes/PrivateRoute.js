@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-function Provateroute(props) {
-    let auth = false
+function PrivateRoute(props) {
+    let auth = true
     return (
         <div>
             {auth ? <Outlet/> : <Navigate to={"/auth"} replace/>}
@@ -10,4 +10,4 @@ function Provateroute(props) {
     );
 }
 
-export default Provateroute;
+export default PrivateRoute;

@@ -8,33 +8,7 @@ class Header extends Component {
 
     }
 
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
-    componentWillUnmount() {
-
-    }
+    
 
     render() {
         return (
@@ -66,6 +40,7 @@ class Header extends Component {
                                 <li><NavLink className="nav-link scrollto" to="/">Home</NavLink></li>
                                 <li><NavLink className="nav-link scrollto" to="/departments">Departments</NavLink></li>
                                 <li><NavLink className="nav-link scrollto" to="/doctore">Doctors</NavLink></li>
+                                <li><NavLink className="nav-link scrollto " to="/medisin">Medisin</NavLink></li>
                                 <li><NavLink className="nav-link scrollto " to="/about">About</NavLink></li>
                                 <li><NavLink className="nav-link scrollto" to="/contact">Contact</NavLink></li>
                             </ul>

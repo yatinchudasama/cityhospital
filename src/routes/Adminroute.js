@@ -1,16 +1,21 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Medisin from '../admin/container/Medisin/Medisin';
-import Provateroute from './Provateroute';
+import PrivateRoute from './PrivateRoute';
+import Layout from '../admin/layout/Layout';
+import Doctor from '../admin/container/Doctor/Doctor';
 
 function Adminroute(props) {
     return (
-        <Routes>
-            <Route element={<Provateroute/>}>
-                <Route exact path="/medisin" element={<Medisin />} />
-            </Route>
+        <Layout>
+            <Routes>
+                <Route element={<PrivateRoute />}>
+                    <Route exact path="/medisin" element={<Medisin />} />
+                    <Route exact path='/doctor' element={<Doctor/>} />
+                </Route>
 
-        </Routes>
+            </Routes>
+        </Layout>
     );
 }
 

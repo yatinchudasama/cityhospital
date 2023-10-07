@@ -8,28 +8,42 @@ import About from '../containers/About/About';
 import Contact from '../containers/Contact/Contact';
 import Appointment from '../containers/Appointment/Appointment';
 import Auth from '../containers/Auth/Auth';
-import Provateroute from './Provateroute';
+
 import Dept from '../containers/Department/Dept';
+import Profile from '../containers/Home/Review';
+import PrivateRoute from './PrivateRoute';
+import Review from '../containers/Home/Review';
+import Medisin from '../containers/Medisin/Medisin';
+import MedisinData from '../containers/Medisin/MedisinData';
+import Header from '../component/Header/Header';
+import Footer from '../component/Footer/Footer';
 
 
 function Userroute(props) {
     return (
-        <Routes>
+        <>
+            <Header />
+            <Routes>
 
-            <Route exact path="/" element={<Home />} />
-            <Route exact path='/departments' element={<Departments />} />
-            <Route exact path='/departments:id' element={<Dept />} />
-            <Route exact path='/doctore' element={<Doctors />} />
-            <Route exact path='/about' element={<About />} />
-            <Route exact path='/contact' element={<Contact />} />
+                <Route exact path="/" element={<Home />} />
+                <Route exact path='/review-detail/:id' element={<Review />} />
+                <Route exact path='/departments' element={<Departments />} />
+                <Route exact path='/departments/:id' element={<Dept />} />
+                <Route exact path='/doctore' element={<Doctors />} />
+                <Route exact path='/medisin' element={<Medisin />} />
+                <Route exact path='/medisineslist/:id' element={<MedisinData />} />
+                <Route exact path='/about' element={<About />} />
+                <Route exact path='/contact' element={<Contact />} />
 
-            <Route element={<Provateroute />}>
-                <Route exact path='/appointment' element={<Appointment />} />
-            </Route>
+                <Route element={<PrivateRoute />}>
+                    <Route exact path='/appointment' element={<Appointment />} />
+                </Route>
 
-            <Route exact path='/auth' element={<Auth />} />
+                <Route exact path='/auth' element={<Auth />} />
 
-        </Routes>
+            </Routes>
+            <Footer />
+        </>
     );
 }
 
