@@ -65,21 +65,63 @@ function Medisin(props) {
 
 
     const [medicins, setMedicins] = useState(medisin)
+    const [search, setSearch] = useState('')
+    const [sort, setSort] = useState('')
 
-    console.log("hgcdhgchgc");
+    let localData = JSON.parse(localStorage.getItem("medisin"));
+    // console.log(localData);
+
+    const handalsearchSort = () => {
+        console.log('yyyy');
+        
+        let localData = JSON.parse(localStorage.getItem("medisin"));
+        // console.log(localData);
+
+        let Data = localData.filter((v) => {
+            return(
+                v.name.toLowerCase().includes(search.toLowerCase()) ||
+                v.price.toString().includes(search.toString())
+            )
+          
+        })
+
+        Data = Data.sort((a,b) => {
+            if(sort === 'az'){
+                return a.name.localeCompare(b.name)
+            }else if(sort === 'za'){
+                return b.name.localeCompare(a.name)
+            }else if(sort === 'low'){
+                return a.price - b.price;
+            } else if(sort === 'higth'){
+                return b.price - a.price;
+            }
+        })
+        console.log(Data);
+
+        return Data
+    }
+
+    const finalData = handalsearchSort()
 
     return (
         <div>
+            <input placeholder='Search' onChange={(e) => setSearch(e.target.value)}></input>
+
+            <select onChange={(e) => setSort(e.target.value)}>
+                <option value='0'>--select--</option>
+                <option value='low'>Low price</option>
+                <option value='high'>high price</option>
+                <option value='a'>A to Z</option>
+                <option value='z'>Z to A</option>
+            </select>
             {
-                medicins.map((v) => {
+                finalData.map((v) => {
                     return (
                         <section id="doctors" className="doctors">
                             <div className="container">
                                 <div className="section-title">
-                                    <NavLink to={"/medisineslist/" + v.id}>
-                                        <h2>{v.name}</h2>
-                                        <p>{v.desc}</p>
-                                    </NavLink>
+                                   <h2>{v.name}</h2>
+                                   <h3>{v.price}</h3>
                                 </div>
                             </div>
                         </section>
