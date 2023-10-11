@@ -17,12 +17,16 @@ import Medisin from '../containers/Medisin/Medisin';
 import MedisinData from '../containers/Medisin/MedisinData';
 import Header from '../component/Header/Header';
 import Footer from '../component/Footer/Footer';
+import { useState } from 'react';
 
 
 function Userroute(props) {
+    const [countCard, setCountCard] = useState('')
+    const [favirote, setFavirote] = useState('')
+    const [fav, setFav] = useState([])
     return (
         <>
-            <Header />
+            <Header countCard={countCard} fav={fav}/>
             <Routes>
 
                 <Route exact path="/" element={<Home />} />
@@ -30,7 +34,7 @@ function Userroute(props) {
                 <Route exact path='/departments' element={<Departments />} />
                 <Route exact path='/departments/:id' element={<Dept />} />
                 <Route exact path='/doctore' element={<Doctors />} />
-                <Route exact path='/medisin' element={<Medisin />} />
+                <Route exact path='/medisin' element={<Medisin increment={setCountCard} fav={fav} setFav={setFav}/>} />
                 <Route exact path='/medisineslist/:id' element={<MedisinData />} />
                 <Route exact path='/about' element={<About />} />
                 <Route exact path='/contact' element={<Contact />} />

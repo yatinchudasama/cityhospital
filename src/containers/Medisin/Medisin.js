@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Card from '../Test/Card';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 const medisin = [
@@ -60,39 +62,51 @@ const medisin = [
         "desc": "Orlistat, sold under the brand name Xenical among others, is a medication used to treat obesity. Its primary function is preventing the absorption of fats from the human diet by acting as a lipase inhibitor, thereby reducing caloric intake."
     }
 ]
-function Medisin(props) {
+function Medisin({ increment, fav, setFav }) {
 
 
 
     const [medicins, setMedicins] = useState(medisin)
     const [search, setSearch] = useState('')
     const [sort, setSort] = useState('')
+    const [cart, setCart] = useState('')
+    const [mdata, setMdata] = useState('')
 
-    let localData = JSON.parse(localStorage.getItem("medisin"));
+
+
+    // let localData = JSON.parse(localStorage.getItem("medisin"));
     // console.log(localData);
+    const getData = () => {
+        let localData = JSON.parse(localStorage.getItem("medisin"));
+        setMdata(localData)
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     const handalsearchSort = () => {
         console.log('yyyy');
-        
+
         let localData = JSON.parse(localStorage.getItem("medisin"));
         // console.log(localData);
 
         let Data = localData.filter((v) => {
-            return(
+            return (
                 v.name.toLowerCase().includes(search.toLowerCase()) ||
                 v.price.toString().includes(search.toString())
             )
-          
+
         })
 
-        Data = Data.sort((a,b) => {
-            if(sort === 'az'){
+        Data = Data.sort((a, b) => {
+            if (sort === 'az') {
                 return a.name.localeCompare(b.name)
-            }else if(sort === 'za'){
+            } else if (sort === 'za') {
                 return b.name.localeCompare(a.name)
-            }else if(sort === 'low'){
+            } else if (sort === 'low') {
                 return a.price - b.price;
-            } else if(sort === 'higth'){
+            } else if (sort === 'high') {
                 return b.price - a.price;
             }
         })
@@ -103,6 +117,27 @@ function Medisin(props) {
 
     const finalData = handalsearchSort()
 
+    const handleAddCart = () => {
+        console.log('yyyyyy');
+        increment((prev) => prev + 1)
+
+
+    }
+
+    const handleFavirote = (id) => {
+        if(fav.includes(id)){
+            let fData = fav.filter((v) => v !== id)
+            setFav(fData)
+        }else{
+            setFav((prev) => [...prev, id])
+        }
+
+    }
+    console.log(fav); 
+
+    const handleRemove = (id) => {
+
+    }
     return (
         <div>
             <input placeholder='Search' onChange={(e) => setSearch(e.target.value)}></input>
@@ -120,8 +155,20 @@ function Medisin(props) {
                         <section id="doctors" className="doctors">
                             <div className="container">
                                 <div className="section-title">
-                                   <h2>{v.name}</h2>
-                                   <h3>{v.price}</h3>
+
+
+                                    <Card
+                                        title={v.name}
+                                        subtitle={v.price}
+                                        btnvalue='Add to Cat'
+                                        btnClick={handleAddCart}
+                                        favClick={() => handleFavirote(v.id)}
+                                        remClick={() => handleRemove(v.id)}
+                                        favState={fav.includes(v.id)? true : false}
+                                    // icon ={<FavoriteIcon/>}
+                                    />
+
+
                                 </div>
                             </div>
                         </section>
