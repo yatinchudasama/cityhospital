@@ -71,6 +71,7 @@ function Header({ countCard,fav }) {
                             <li><NavLink className="nav-link scrollto" to="/doctore">Doctors</NavLink></li>
                             <li><NavLink className="nav-link scrollto " to="/medisin">Medisin</NavLink></li>
                             <li><NavLink className="nav-link scrollto " to="/about">About</NavLink></li>
+                            <li><NavLink className="nav-link scrollto " to="/counter">Counter</NavLink></li>
                             <li><NavLink className="nav-link scrollto" to="/contact">Contact</NavLink></li>
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />

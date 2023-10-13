@@ -18,6 +18,7 @@ import MedisinData from '../containers/Medisin/MedisinData';
 import Header from '../component/Header/Header';
 import Footer from '../component/Footer/Footer';
 import { useState } from 'react';
+import Counter from '../containers/Counter';
 
 
 function Userroute(props) {
@@ -37,6 +38,8 @@ function Userroute(props) {
                 <Route exact path='/medisin' element={<Medisin increment={setCountCard} fav={fav} setFav={setFav}/>} />
                 <Route exact path='/medisineslist/:id' element={<MedisinData />} />
                 <Route exact path='/about' element={<About />} />
+
+                <Route exact path='/counter' element={<Counter />} />
                 <Route exact path='/contact' element={<Contact />} />
 
                 <Route element={<PrivateRoute />}>

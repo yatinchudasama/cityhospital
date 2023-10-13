@@ -66,6 +66,7 @@ function Appointment() {
                     {categoryOptions.map((option) => (
                       <option key={option} value={option}>
                         {option}
+                        
                       </option>
                     ))}
                   </Field>
