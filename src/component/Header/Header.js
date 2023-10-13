@@ -6,10 +6,11 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useSelector } from 'react-redux';
 
 
 function Header({ countCard,fav }) {
-
+    const c1 = useSelector(state => state.counetr)
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
             right: -3,
@@ -30,7 +31,7 @@ function Header({ countCard,fav }) {
                         <i className="bi bi-phone" /> +91 9988776655
                     </div>
                     <IconButton aria-label="cart">
-                        <StyledBadge badgeContent={countCard.length} color="secondary">
+                        <StyledBadge badgeContent={c1.count} color="secondary">
                             <ShoppingCartIcon />
                         </StyledBadge>
 
