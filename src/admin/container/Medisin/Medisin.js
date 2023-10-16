@@ -24,11 +24,6 @@ export default function Medisin() {
         }
     }, [])
 
-
-
-    
-
-
     const handleFormSubmit = (data) => {
         let localData = JSON.parse(localStorage.getItem("medisin"));
         // console.log(localData);
@@ -71,8 +66,6 @@ export default function Medisin() {
 
     }
     // Tabledata()
-
-
 
     const handleEdit = (data) => {
         // console.log(data);
