@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MedisinForm from './MedisinForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { getmedicines } from '../../../reducx/action/medicines.action';
 
 
 export default function Medisin() {
@@ -16,12 +18,18 @@ export default function Medisin() {
     const [mData, setMData] = useState([])
     const [updte, setUpdate] = useState(false)
 
+    const medisines = useSelector(state => state.medisines)
+    console.log(medisines);
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        let localData = JSON.parse(localStorage.getItem("medisin"));
-        if (localData) {
-            setMData(localData);
-        }
+        // let localData = JSON.parse(localStorage.getItem("medisin"));
+        // if (localData) {
+        //     setMData(localData);
+        // }
+        dispatch(getmedicines())
+        
     }, [])
 
     const handleFormSubmit = (data) => {
@@ -115,7 +123,7 @@ export default function Medisin() {
             <MedisinForm onHandleSubmit={handleFormSubmit} onupdte={updte}/>
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={mData}
+                    rows={medisines.medisines}
                     columns={columns}
                     initialState={{
                         pagination: {
