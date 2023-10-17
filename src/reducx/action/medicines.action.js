@@ -11,3 +11,14 @@ export const getmedicines =() => (dispatch) => {
         console.log(error);
     }
 }
+
+
+export const deletemedicines =() => (dispatch) => {
+    try{
+        fetch(API_URL + "medicines")
+        .then(response => response.json())
+        .then(data => dispatch({type: GET_MEDICINES, payload:data}))
+    } catch(error){
+        console.log(error);
+    }
+}
