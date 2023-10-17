@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MedisinForm from './MedisinForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { getmedicines } from '../../../reducx/action/medicines.action';
+import { deletemedicines, getmedicines } from '../../../reducx/action/medicines.action';
 
 
 export default function Medisin() {
@@ -85,12 +85,13 @@ export default function Medisin() {
 
     const handleDelete = (id) => {
         // console.log(id);
-        let localData = JSON.parse(localStorage.getItem("medisin"));
+        // let localData = JSON.parse(localStorage.getItem("medisin"));
 
-        let fData = localData.filter((v) => v.id !== id)
+        // let fData = localData.filter((v) => v.id !== id)
 
-        localStorage.setItem("medisin", JSON.stringify(fData))
-        setMData(fData)
+        // localStorage.setItem("medisin", JSON.stringify(fData))
+        // setMData(fData)
+        dispatch(deletemedicines(id));
 
     }
 

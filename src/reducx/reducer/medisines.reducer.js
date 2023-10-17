@@ -1,4 +1,4 @@
-import { GET_MEDICINES } from "../ActionType";
+import { DELETE_MEDICINES, GET_MEDICINES } from "../ActionType";
 
 
 export const initialValues={
@@ -16,6 +16,12 @@ export const medicinesReducer = (state=initialValues, action) => {
             ...state,
             medisines : action.payload
         }
+
+        case DELETE_MEDICINES:
+            return{
+                ...state,
+                medisines : state.medisines.filter((v) => v.id !== action.payload)
+            }
         default:
             return state
     }
