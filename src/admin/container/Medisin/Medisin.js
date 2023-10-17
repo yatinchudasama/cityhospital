@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MedisinForm from './MedisinForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletemedicines, getmedicines } from '../../../reducx/action/medicines.action';
+import { addmedicines, deletemedicines, getmedicines, updatemedicines } from '../../../reducx/action/medicines.action';
 
 
 export default function Medisin() {
@@ -33,33 +33,42 @@ export default function Medisin() {
     }, [])
 
     const handleFormSubmit = (data) => {
-        let localData = JSON.parse(localStorage.getItem("medisin"));
-        // console.log(localData);
-        let id = Math.floor(Math.random() * 1000)
-        if (localData) {
-            if (updte) {
-                let localData = JSON.parse(localStorage.getItem("medisin"));
+        
 
-                let index = localData.findIndex((v) => v.id == data.id)
-                console.log(index);
-
-                localData[index] = data;
-
-                localStorage.setItem("medisin", JSON.stringify(localData))
-                setMData(localData)
-
-                setUpdate(false)
-            } else {
-                localData.push({ id: id, ...data });
-                localStorage.setItem("medisin", JSON.stringify(localData))
-                setMData(localData)
-                // console.log(localData);
-            }
-
-        } else {
-            localStorage.setItem("medisin", JSON.stringify([{ id, ...data }]))
-            setMData([{ id, ...data }])
+        if (updte) {
+            dispatch(updatemedicines(data))
+        } else{
+            dispatch(addmedicines(data))
         }
+
+
+        // let localData = JSON.parse(localStorage.getItem("medisin"));
+        // // console.log(localData);
+        // let id = Math.floor(Math.random() * 1000)
+        // if (localData) {
+        //     if (updte) {
+        //         let localData = JSON.parse(localStorage.getItem("medisin"));
+
+        //         let index = localData.findIndex((v) => v.id == data.id)
+        //         console.log(index);
+
+        //         localData[index] = data;
+
+        //         localStorage.setItem("medisin", JSON.stringify(localData))
+        //         setMData(localData)
+
+        //         setUpdate(false)
+        //     } else {
+        //         localData.push({ id: id, ...data });
+        //         localStorage.setItem("medisin", JSON.stringify(localData))
+        //         setMData(localData)
+        //         // console.log(localData);
+        //     }
+
+        // } else {
+        //     localStorage.setItem("medisin", JSON.stringify([{ id, ...data }]))
+        //     setMData([{ id, ...data }]) 
+        // }
     }
 
     const handleUpdate = (data) => {
@@ -81,6 +90,8 @@ export default function Medisin() {
         // setValues(data)
         // setMData(data)
         setUpdate(data)
+
+        // dispatch(addmedicines(data))
     }
 
     const handleDelete = (id) => {
@@ -96,7 +107,7 @@ export default function Medisin() {
     }
 
     const columns = [
-        { field: 'name', headerName: 'Name', width: 70 },
+        { field: 'name', headerName: 'Name', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
         { field: 'date', headerName: 'date', width: 130 },
         {

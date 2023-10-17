@@ -1,4 +1,4 @@
-import { DELETE_MEDICINES, GET_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINES, GET_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 
 export const initialValues={
@@ -22,7 +22,25 @@ export const medicinesReducer = (state=initialValues, action) => {
                 ...state,
                 medisines : state.medisines.filter((v) => v.id !== action.payload)
             }
-        default:
+
+        case ADD_MEDICINES:
+            return{
+                ...state,
+                medisines : state.medisines.concat(action.payload)
+            }
+        
+            case UPDATE_MEDICINES:
+                return{
+                    ...state,
+                    medisines : state.medisines.map((v) => {
+                        if(action.payload.id){
+                            return action.payload
+                        }else{
+                            return v
+                        }
+                    })
+                }
+            default:
             return state
     }
 
