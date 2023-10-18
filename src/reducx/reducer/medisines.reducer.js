@@ -1,4 +1,4 @@
-import { ADD_MEDICINES, DELETE_MEDICINES, GET_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 
 export const initialValues={
@@ -11,10 +11,17 @@ export const medicinesReducer = (state=initialValues, action) => {
     console.log(action);
 
     switch(action.type){
+        case LODING_MEDICINES:
+            return{
+                isLoding : true,
+                medisines: [],
+                erroe : null,
+            }
         case GET_MEDICINES:
         return{
-            ...state,
-            medisines : action.payload
+            isLoding : false,
+            medisines : action.payload,
+            erroe : null,
         }
 
         case DELETE_MEDICINES:
@@ -33,7 +40,7 @@ export const medicinesReducer = (state=initialValues, action) => {
                 return{
                     ...state,
                     medisines : state.medisines.map((v) => {
-                        if(action.payload.id){
+                        if(v.id === action.payload.id){
                             return action.payload
                         }else{
                             return v

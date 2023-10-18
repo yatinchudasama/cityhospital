@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Card from '../Test/Card';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { getmedicines } from '../../reducx/action/medicines.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { LODING_MEDICINES } from '../../reducx/ActionType';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const medisin = [
@@ -66,7 +70,7 @@ function Medisin({ increment, fav, setFav }) {
 
 
 
-    const [medicins, setMedicins] = useState(medisin)
+    // const [medicins, setMedicins] = useState(medisin)
     const [search, setSearch] = useState('')
     const [sort, setSort] = useState('')
     const [cart, setCart] = useState('')
@@ -76,9 +80,14 @@ function Medisin({ increment, fav, setFav }) {
 
     // let localData = JSON.parse(localStorage.getItem("medisin"));
     // console.log(localData);
+    const medisines = useSelector(state => state.medisines)
+    console.log(medisines.medisines);
+
+    const dispatch = useDispatch()
     const getData = () => {
-        let localData = JSON.parse(localStorage.getItem("medisin"));
-        setMdata(localData)
+        // let localData = JSON.parse(localStorage.getItem("medisin"))
+        // setMdata(localData)
+        dispatch(getmedicines())
     }
 
     useEffect(() => {
@@ -125,56 +134,60 @@ function Medisin({ increment, fav, setFav }) {
     }
 
     const handleFavirote = (id) => {
-        if(fav.includes(id)){
+        if (fav.includes(id)) {
             let fData = fav.filter((v) => v !== id)
             setFav(fData)
-        }else{
+        } else {
             setFav((prev) => [...prev, id])
         }
 
     }
-    console.log(fav); 
+    console.log(fav);
 
     const handleRemove = (id) => {
 
     }
     return (
-        <div>
-            <input placeholder='Search' onChange={(e) => setSearch(e.target.value)}></input>
-
-            <select onChange={(e) => setSort(e.target.value)}>
-                <option value='0'>--select--</option>
-                <option value='low'>Low price</option>
-                <option value='high'>high price</option>
-                <option value='a'>A to Z</option>
-                <option value='z'>Z to A</option>
-            </select>
+        <div className='container'>
+            <br></br><br></br>
             {
-                finalData.map((v) => {
-                    return (
-                        <section id="doctors" className="doctors">
-                            <div className="container">
-                                <div className="section-title">
+                medisines.isLoding ? <CircularProgress /> :
+                    medisines.medisines.map((v) => {
+                        <>
+                            <input placeholder='Search' onChange={(e) => setSearch(e.target.value)}></input>
 
+                            <select onChange={(e) => setSort(e.target.value)}>
+                                <option value='0'>--select--</option>
+                                <option value='low'>Low price</option>
+                                <option value='high'>high price</option>
+                                <option value='a'>A to Z</option>
+                                <option value='z'>Z to A</option>
+                            </select>
+                        </>
+                        return (
+                            <section id="doctors" className="doctors">
+                                <div className="container">
+                                    <div className="section-title">
 
-                                    <Card
-                                        title={v.name}
-                                        subtitle={v.price}
-                                        btnvalue='Add to Cat'
-                                        btnClick={handleAddCart}
-                                        favClick={() => handleFavirote(v.id)}
-                                        remClick={() => handleRemove(v.id)}
-                                        favState={fav.includes(v.id)? true : false}
-                                    // icon ={<FavoriteIcon/>}
-                                    />
+                                        <Card
+                                            title={v.name}
+                                            subtitle={v.price}
+                                            btnvalue='Add to Cat'
+                                            btnClick={handleAddCart}
+                                            favClick={() => handleFavirote(v.id)}
+                                            remClick={() => handleRemove(v.id)}
+                                            favState={fav.includes(v.id) ? true : false}
+                                        // icon ={<FavoriteIcon/>}
+                                        />
 
-
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
-                    )
-                })
+                            </section>
+                        )
+                    })
             }
+
+
         </div>
     );
 }

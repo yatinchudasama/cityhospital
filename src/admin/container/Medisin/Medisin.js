@@ -13,9 +13,6 @@ import { addmedicines, deletemedicines, getmedicines, updatemedicines } from '..
 
 
 export default function Medisin() {
-
-
-    const [mData, setMData] = useState([])
     const [updte, setUpdate] = useState(false)
 
     const medisines = useSelector(state => state.medisines)
