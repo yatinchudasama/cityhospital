@@ -4,6 +4,7 @@ import Medisin from '../admin/container/Medisin/Medisin';
 import PrivateRoute from './PrivateRoute';
 import Layout from '../admin/layout/Layout';
 import Doctor from '../admin/container/Doctor/Doctor';
+import Department from '../admin/container/Department/Department';
 
 function Adminroute(props) {
     return (
@@ -12,6 +13,7 @@ function Adminroute(props) {
                 <Route element={<PrivateRoute />}>
                     <Route exact path="/medisin" element={<Medisin />} />
                     <Route exact path='/doctor' element={<Doctor/>} />
+                    <Route exact path='/department' element={<Department/>} />
                 </Route>
 
             </Routes>

@@ -20,6 +20,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MedicationIcon from '@mui/icons-material/Medication';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -103,7 +104,8 @@ export default function Doctor({ children }) {
 
     const Iconlist = [
         {lable:"Medisin", icon:<MedicationIcon/>, to: "/admin/Medisin"},
-        {lable:"Doctor", icon:<LocalHospitalIcon/>, to: "/admin/doctor"}
+        {lable:"Doctor", icon:<LocalHospitalIcon/>, to: "/admin/doctor"},
+        {lable:"Department", icon:<AddIcCallIcon/>, to: "/admin/department"}
     ]
 
     return (
