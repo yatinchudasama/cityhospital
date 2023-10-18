@@ -12,12 +12,12 @@ export const getmedicines =() => (dispatch) => {
     }
 }
 
+
 export const deletemedicines =(id) => (dispatch) => {
     try{
         fetch(API_URL + "medicines/" + id, {
             method: "DELETE"
         })
-      
         .then(() => dispatch({type: DELETE_MEDICINES, payload:id}))
     } catch(error){
         console.log(error);
