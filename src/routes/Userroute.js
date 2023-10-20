@@ -19,6 +19,7 @@ import Header from '../component/Header/Header';
 import Footer from '../component/Footer/Footer';
 import { useState } from 'react';
 import Counter from '../containers/Counter';
+import Cart from '../containers/Cart/Cart';
 
 
 function Userroute(props) {
@@ -47,6 +48,7 @@ function Userroute(props) {
                 </Route>
 
                 <Route exact path='/auth' element={<Auth />} />
+                <Route exact path='/cart' element={<Cart />} />
 
             </Routes>
             <Footer />

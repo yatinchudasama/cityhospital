@@ -1,27 +1,33 @@
-import { ADD_MEDICINES, DELETE_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINES, ERROR_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 
 export const initialValues={
     isLoding : false,
     medisines: [],
-    erroe : null,
+    error : null,
 }
 
 export const medicinesReducer = (state=initialValues, action) => {
     console.log(action);
 
     switch(action.type){
+        case ERROR_MEDICINES:
+            return{
+                isLoding : false,
+                medisines: [],
+                error : action.payload,
+            }
         case LODING_MEDICINES:
             return{
                 isLoding : true,
                 medisines: [],
-                erroe : null,
+                error : null,
             }
         case GET_MEDICINES:
         return{
             isLoding : false,
             medisines : action.payload,
-            erroe : null,
+            error : null,
         }
 
         case DELETE_MEDICINES:

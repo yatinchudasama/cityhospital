@@ -1,6 +1,6 @@
 import { json } from "react-router-dom";
 import { API_URL } from "../../utils/baseURL";
-import { ADD_MEDICINES, DELETE_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { ADD_MEDICINES, DELETE_MEDICINES, ERROR_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 
 
 export const getmedicines = () => (dispatch) => {
@@ -8,12 +8,19 @@ export const getmedicines = () => (dispatch) => {
         dispatch(logingmedicine());
         return setTimeout(function () {
             fetch(API_URL + "medicines")
-                .then(response => response.json())
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    throw new Error('Something went wrong')
+                })
                 .then(data => dispatch({ type: GET_MEDICINES, payload: data }))
+
+                .catch(error => dispatch(errormedicines(error)))
         }, 2000)
 
     } catch (error) {
-        console.log(error);
+        dispatch(errormedicines(error))
     }
 }
 
@@ -66,4 +73,8 @@ export const updatemedicines = (data) => (dispatch) => {
 
 export const logingmedicine = () => (dispatch) => {
     dispatch({ type: LODING_MEDICINES })
+}
+
+export const errormedicines = (error) => (dispatch) => {
+    dispatch({ type: ERROR_MEDICINES, payload: error.message })
 }

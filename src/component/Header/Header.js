@@ -21,7 +21,14 @@ function Header({ countCard,fav }) {
     }));
 
 
+    const cart = useSelector(state => state.cart)
 
+    let qty = 0;
+    {
+        cart.cart.map((v) => {
+            qty = qty + v.qty
+        })
+    }
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -31,7 +38,7 @@ function Header({ countCard,fav }) {
                         <i className="bi bi-phone" /> +91 9988776655
                     </div>
                     <IconButton aria-label="cart">
-                        <StyledBadge badgeContent={c1.count} color="secondary">
+                        <StyledBadge badgeContent={qty} color="secondary">
                             <ShoppingCartIcon />
                         </StyledBadge>
 

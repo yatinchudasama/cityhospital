@@ -6,6 +6,7 @@ import { getmedicines } from '../../reducx/action/medicines.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { LODING_MEDICINES } from '../../reducx/ActionType';
 import CircularProgress from '@mui/material/CircularProgress';
+import { addtocart } from '../../reducx/action/cart.action';
 
 
 const medisin = [
@@ -81,7 +82,7 @@ function Medisin({ increment, fav, setFav }) {
     // let localData = JSON.parse(localStorage.getItem("medisin"));
     // console.log(localData);
     const medisines = useSelector(state => state.medisines)
-    console.log(medisines.medisines);
+    console.log(medisines.error);
 
     const dispatch = useDispatch()
     const getData = () => {
@@ -126,10 +127,10 @@ function Medisin({ increment, fav, setFav }) {
 
     const finalData = handalsearchSort()
 
-    const handleAddCart = () => {
-        console.log('yyyyyy');
-        increment((prev) => prev + 1)
-
+    const handleAddCart = (id) => {
+        // console.log('yyyyyy');
+        // increment((prev) => prev + 1)
+        dispatch(addtocart(id))
 
     }
 
@@ -152,6 +153,8 @@ function Medisin({ increment, fav, setFav }) {
             <br></br><br></br>
             {
                 medisines.isLoding ? <CircularProgress /> :
+                medisines.error ? <p>{medisines.error}</p> :
+                
                     medisines.medisines.map((v) => {
                         <>
                             <input placeholder='Search' onChange={(e) => setSearch(e.target.value)}></input>
@@ -173,12 +176,13 @@ function Medisin({ increment, fav, setFav }) {
                                             title={v.name}
                                             subtitle={v.price}
                                             btnvalue='Add to Cat'
-                                            btnClick={handleAddCart}
+                                            btnClick={() => handleAddCart(v.id)}
                                             favClick={() => handleFavirote(v.id)}
                                             remClick={() => handleRemove(v.id)}
                                             favState={fav.includes(v.id) ? true : false}
                                         // icon ={<FavoriteIcon/>}
                                         />
+
 
                                     </div>
                                 </div>

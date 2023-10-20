@@ -14,7 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 function Card({ id = '', title = '', subtitle = '', btnvalue = '', btnClick = '', favClick = '', favState, }) {
-    console.log(title);
+    // console.log(title);
     return (
         <div>
             <BaseCard className='box'>
