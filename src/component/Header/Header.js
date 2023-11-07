@@ -9,7 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector } from 'react-redux';
 
 
-function Header({ countCard,fav }) {
+function Header({ countCard, fav }) {
     const c1 = useSelector(state => state.counetr)
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -22,13 +22,17 @@ function Header({ countCard,fav }) {
 
 
     const cart = useSelector(state => state.cart)
+    console.log(cart);
 
-    let qty = 0;
-    {
-        cart.cart.map((v) => {
-            qty = qty + v.qty
-        })
-    }
+    const cartCount = cart.cart.reduce((acc,v) => acc + v.qty,0)
+    console.log(cartCount);
+
+    // let qty = 0;
+    // {
+    //     cart.cart.map((v) => {
+    //         qty = qty + v.qty
+    //     })
+    // }
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -37,12 +41,15 @@ function Header({ countCard,fav }) {
                         <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
                         <i className="bi bi-phone" /> +91 9988776655
                     </div>
-                    <IconButton aria-label="cart">
-                        <StyledBadge badgeContent={qty} color="secondary">
-                            <ShoppingCartIcon />
-                        </StyledBadge>
+                    <Link to={"/cart"}>
+                        <IconButton aria-label="cart">
 
-                    </IconButton>
+                            <StyledBadge badgeContent={cartCount} color="secondary">
+                                <ShoppingCartIcon />
+                            </StyledBadge>
+
+                        </IconButton>
+                    </Link>
 
                     <IconButton aria-label="cart">
                         <StyledBadge badgeContent={fav.length} color="secondary">

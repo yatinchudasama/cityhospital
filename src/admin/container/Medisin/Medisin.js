@@ -9,7 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MedisinForm from './MedisinForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { addmedicines, deletemedicines, getmedicines, updatemedicines } from '../../../reducx/action/medicines.action';
+import { addmedicines,  getmedicines, updatemedicines } from '../../../reducx/action/medicines.action';
+import { deletemedicines } from '../../../slice/medisin.slice';
 
 
 export default function Medisin() {

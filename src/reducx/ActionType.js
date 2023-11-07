@@ -15,3 +15,4 @@ export const LODING_MEDICINES = "LODING_MEDICINES"
 export const ERROR_MEDICINES = "ERROR_MEDICINES"
 
 export const ADD_TO_CART = "ADD_TO_CART"
+export const INC_QTY = "INC_QTY"

@@ -1,22 +1,29 @@
 import { json } from "react-router-dom";
 import { API_URL } from "../../utils/baseURL";
 import { ADD_MEDICINES, DELETE_MEDICINES, ERROR_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
+import { addMedicinesData, deletMedicinesData, getMedicinesData } from "../../common/api/medicines.api";
+import { putRequest } from "../../common/request";
 
 
 export const getmedicines = () => (dispatch) => {
     try {
         dispatch(logingmedicine());
         return setTimeout(function () {
-            fetch(API_URL + "medicines")
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    throw new Error('Something went wrong')
-                })
-                .then(data => dispatch({ type: GET_MEDICINES, payload: data }))
+            getMedicinesData()
+                .then(response => dispatch({ type: GET_MEDICINES, payload: response.data }))
 
                 .catch(error => dispatch(errormedicines(error)))
+                .then((response) => console.log(response.data))
+            // fetch(API_URL + "medicines")
+            //     .then(response => {
+            //         if (response.ok) {
+            //             return response.json()
+            //         }
+            //         throw new Error('Something went wrong')
+            //     })
+            //     .then(data => dispatch({ type: GET_MEDICINES, payload: data }))
+
+            //     .catch(error => dispatch(errormedicines(error)))
         }, 2000)
 
     } catch (error) {
@@ -27,10 +34,13 @@ export const getmedicines = () => (dispatch) => {
 
 export const deletemedicines = (id) => (dispatch) => {
     try {
-        fetch(API_URL + "medicines/" + id, {
-            method: "DELETE"
-        })
+        deletMedicinesData(id)
             .then(dispatch({ type: DELETE_MEDICINES, payload: id }))
+            .catch(error => dispatch(errormedicines(error)))
+        // fetch(API_URL + "medicines/" + id, {
+        //     method: "DELETE"
+        // })
+        //     .then(dispatch({ type: DELETE_MEDICINES, payload: id }))
     } catch (error) {
         console.log(error);
     }
@@ -40,15 +50,18 @@ export const deletemedicines = (id) => (dispatch) => {
 export const addmedicines = (data) => (dispatch) => {
     console.log(data);
     try {
-        fetch(API_URL + "medicines", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-
-        })
-            .then(response => response.json())
-            .then(rdata => dispatch({ type: ADD_MEDICINES, payload: rdata }))
+        addMedicinesData(data)
+            .then(response => dispatch({ type: ADD_MEDICINES, payload: response.data }))
             .catch((error) => console.log(error))
+        // fetch(API_URL + "medicines", {
+        //     method: "POST",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(data)
+
+        // })
+        //     .then(response => response.json())
+        //     .then(rdata => dispatch({ type: ADD_MEDICINES, payload: rdata }))
+        //     .catch((error) => console.log(error))
     } catch (error) {
         console.log(error);
     }
@@ -57,15 +70,18 @@ export const addmedicines = (data) => (dispatch) => {
 export const updatemedicines = (data) => (dispatch) => {
     console.log(data);
     try {
-        fetch(API_URL + "medicines/" + data.id, {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-
-        })
-            .then(response => response.json())
-            .then(rdata => dispatch({ type: UPDATE_MEDICINES, payload: rdata }))
+        updatemedicines(data)
+            .then(response => dispatch({ type: UPDATE_MEDICINES, payload: response.data }))
             .catch((error) => console.log(error))
+        // fetch(API_URL + "medicines/" + data.id, {
+        //     method: "PUT",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(data)
+
+        // })
+        //     .then(response => response.json())
+        //     .then(rdata => dispatch({ type: UPDATE_MEDICINES, payload: rdata }))
+        //     .catch((error) => console.log(error))
     } catch (error) {
         console.log(error);
     }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { decrement, increment } from '../reducx/action/counter.action';
+import { decrement, increment } from '../slice/counter.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Counter(props) {
@@ -8,6 +8,7 @@ function Counter(props) {
     const dispatche = useDispatch()
 
     const handleIncrement = () => {
+        // dispatche(increment())
         dispatche(increment())
     }
 

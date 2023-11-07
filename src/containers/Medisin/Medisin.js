@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Card from '../Test/Card';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { getmedicines } from '../../reducx/action/medicines.action';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { LODING_MEDICINES } from '../../reducx/ActionType';
 import CircularProgress from '@mui/material/CircularProgress';
-import { addtocart } from '../../reducx/action/cart.action';
+import { addtocart } from '../../slice/cart.slice';
+import { getmedicines } from '../../slice/medisin.slice';
+
 
 
 const medisin = [
@@ -82,7 +84,7 @@ function Medisin({ increment, fav, setFav }) {
     // let localData = JSON.parse(localStorage.getItem("medisin"));
     // console.log(localData);
     const medisines = useSelector(state => state.medisines)
-    console.log(medisines.error);
+    console.log(medisines);
 
     const dispatch = useDispatch()
     const getData = () => {
@@ -130,7 +132,8 @@ function Medisin({ increment, fav, setFav }) {
     const handleAddCart = (id) => {
         // console.log('yyyyyy');
         // increment((prev) => prev + 1)
-        dispatch(addtocart(id))
+        // dispatch(addtocart(id))
+        dispatch(   ({id: id, qty: 1}))
 
     }
 
