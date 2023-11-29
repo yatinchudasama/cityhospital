@@ -5,6 +5,7 @@ import { deletMedicinesData, getMedicinesData } from "../common/api/medicines.ap
 const initialState = {
     isLoding : false,
     medisines: [],
+    
     error : null,
 }
 

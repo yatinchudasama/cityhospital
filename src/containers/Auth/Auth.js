@@ -6,6 +6,8 @@ import { InputBox, InputError } from '../../component/UI/Inpurbox/Inputbox.style
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { toBeEnabled } from '@testing-library/jest-dom/matchers';
+import { loginReqwest, signupReqwest, signupreqwest } from '../../reducx/action/auth.action';
+import { useDispatch } from 'react-redux';
 
 function Auth(props) {
 
@@ -51,13 +53,29 @@ function Auth(props) {
 
     let authSchema = yup.object().shape(authobj);
 
+    const dispatch = useDispatch('')
+
+    const handlesignup = (data) => {
+        console.log(data);
+        dispatch(signupReqwest(data))
+    }
+
+    const handlelogin = (data) => {
+        console.log(data);
+        dispatch(loginReqwest(data))
+    }
+
     const formikobj = useFormik({
 
         initialValues: inival,
 
         validationSchema: authSchema,
         onSubmit: values => {
-            console.log(values);
+            if(type === 'login'){
+                handlelogin(values)
+            } else if(type === 'signup'){
+                handlesignup(values)
+            }
         },
         enableReinitialize: true
     })

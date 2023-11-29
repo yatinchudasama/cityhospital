@@ -16,3 +16,11 @@ export const ERROR_MEDICINES = "ERROR_MEDICINES"
 
 export const ADD_TO_CART = "ADD_TO_CART"
 export const INC_QTY = "INC_QTY"
+
+export const SIGNUP_REQWEST = "SIGNUP_REQWEST";
+
+export const SIGNUP_RESPONSE = "SIGNUP_RESPONSE";
+
+export const AUTH_ERROR = "AUTH_ERROR";
+
+export const LOGIN_REQUWEST = "LOGIN_REQUWEST";

@@ -4,13 +4,14 @@ import Footer from './component/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import Userroute from './routes/Userroute';
 import Adminroute from './routes/Adminroute';
-import { configureStore } from './reducx/store';
+// import { persistor, store } from './reducx/store';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './reducx/store';
 
 
 function App() {
-  let { store, persistor } = configureStore();
+
   return (
     <>
       <Provider store={store}>
