@@ -8,21 +8,25 @@ import Adminroute from './routes/Adminroute';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from './reducx/store';
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import Alert from './component/Alert/Alert';
 
 
 function App() {
 
   return (
     <>
-      <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Routes>
-          <Route exact path="/*" element={<Userroute />} />
-          <Route exact path="/admin/*" element={<Adminroute />} />
-        </Routes>
-        </PersistGate>
-      </Provider>
-
+      <SnackbarProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Alert/>
+            <Routes>
+              <Route exact path="/*" element={<Userroute />} />
+              <Route exact path="/admin/*" element={<Adminroute />} />
+            </Routes>
+          </PersistGate>
+        </Provider>
+      </SnackbarProvider>
     </>
   );
 }

@@ -21,6 +21,7 @@ export const signupReducer = (state = initialValues, action) => {
                 error: null,
             }
 
+            
         case AUTH_ERROR:
             return {
                 isLoding: false,

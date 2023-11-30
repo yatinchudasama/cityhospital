@@ -18,7 +18,7 @@ export const signupAPI = (data) => {
                             const errorCode = error.code;
                             const errorMessage = error.message;
 
-                            reject(errorCode.errorMessage)
+                            reject({message: errorMessage})
                         })
                 })
                 .catch((error) => {
@@ -35,5 +35,7 @@ export const signupAPI = (data) => {
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
+
+        return errorCode
     }
 }
