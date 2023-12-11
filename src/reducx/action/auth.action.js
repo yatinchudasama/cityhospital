@@ -1,4 +1,4 @@
-import { AUTH_ERROR, LOGIN_REQUWEST, SIGNUP_REQWEST, SIGNUP_RESPONSE } from "../ActionType"
+import { AUTH_ERROR, FORGET_REQUWEST, LOGIN_REQUWEST, LOGIN_RESPONSE, SIGNUP_REQWEST, SIGNUP_RESPONSE } from "../ActionType"
 
 export const signupReqwest = (data) => (dispatch) => {
     dispatch({type: SIGNUP_REQWEST, payload: data})
@@ -14,5 +14,16 @@ export const authError = (data) => (dispatch) => {
 }
 
 export const loginReqwest = (data) => (dispatch) => {
+    console.log(data);
     dispatch ({type: LOGIN_REQUWEST, payload: data})
+}
+
+export const loginResponse = (data) => (dispatch) => {
+    dispatch({type: LOGIN_RESPONSE, payload: data})
+}
+
+
+export const forgetReqwest = (data) => (dispatch) => {
+    console.log(data);
+    dispatch ({type: FORGET_REQUWEST, payload: data})
 }

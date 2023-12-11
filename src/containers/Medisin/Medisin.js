@@ -133,7 +133,7 @@ function Medisin({ increment, fav, setFav }) {
         // console.log('yyyyyy');
         // increment((prev) => prev + 1)
         // dispatch(addtocart(id))
-        dispatch(   ({id: id, qty: 1}))
+        dispatch(({id: id, qty: 1}))
 
     }
 

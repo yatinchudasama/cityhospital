@@ -3,6 +3,8 @@ import { API_URL } from "../../utils/baseURL";
 import { ADD_MEDICINES, DELETE_MEDICINES, ERROR_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 import { addMedicinesData, deletMedicinesData, getMedicinesData } from "../../common/api/medicines.api";
 import { putRequest } from "../../common/request";
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from "../../firebase";
 
 
 export const getmedicines = () => (dispatch) => {
@@ -47,12 +49,18 @@ export const deletemedicines = (id) => (dispatch) => {
 }
 
 
-export const addmedicines = (data) => (dispatch) => {
+export const addmedicines = (data) => async (dispatch) => {
     console.log(data);
     try {
-        addMedicinesData(data)
-            .then(response => dispatch({ type: ADD_MEDICINES, payload: response.data }))
-            .catch((error) => console.log(error))
+        const docRef = await addDoc(collection(db, "users"), {
+            first: "Ada",
+            last: "Lovelace",
+            born: 1815
+          });
+          console.log("Document written with ID: ", docRef.id);
+        // addMedicinesData(data)
+        //     .then(response => dispatch({ type: ADD_MEDICINES, payload: response.data }))
+        //     .catch((error) => console.log(error))
         // fetch(API_URL + "medicines", {
         //     method: "POST",
         //     headers: { 'Content-Type': 'application/json' },

@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 
 function Header({ countCard, fav }) {
     const c1 = useSelector(state => state.counetr)
+
+    let auth = useSelector(state => state.auth)
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
             right: -3,
@@ -22,10 +24,14 @@ function Header({ countCard, fav }) {
 
 
     const cart = useSelector(state => state.cart)
-    console.log(cart);
+    // console.log(cart);
 
-    const cartCount = cart.cart.reduce((acc,v) => acc + v.qty,0)
-    console.log(cartCount);
+    const cartCount = cart.cart.reduce((acc, v) => acc + v.qty, 0)
+    // console.log(cartCount);
+
+    const handleLogout = () => {
+        console.log('yyyyyyyy');
+    }
 
     // let qty = 0;
     // {
@@ -93,9 +99,13 @@ function Header({ countCard, fav }) {
                     </nav>
                     <NavLink to="/appointment" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
-                    <NavLink to="/auth" className="appointment-btn scrollto">
+
+                    {auth.user ? <NavLink to="/" className="appointment-btn scrollto">
+                        <span className="d-none d-md-inline" onClick={handleLogout()}>Logout</span>
+                    </NavLink> : <NavLink to="/auth" className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Login/ Signup</span>
-                    </NavLink>
+                    </NavLink>}
+
                 </div>
             </header>
         </div>

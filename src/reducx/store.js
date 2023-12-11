@@ -9,7 +9,7 @@ import createSagaMiddleware from 'redux-saga'
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['medisines', 'cart']
+  whitelist: ['medisines', 'cart', 'auth']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReduce)

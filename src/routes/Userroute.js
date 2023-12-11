@@ -6,7 +6,7 @@ import Departments from '../containers/Department/Departments';
 import Doctors from '../containers/Doctor/Doctors';
 import About from '../containers/About/About';
 import Contact from '../containers/Contact/Contact';
-import Appointment from '../containers/Appointment/Appointment';
+// import Appointment from '../containers/Appointment/Appointment';
 import Auth from '../containers/Auth/Auth';
 
 import Dept from '../containers/Department/Dept';
@@ -20,6 +20,8 @@ import Footer from '../component/Footer/Footer';
 import { useState } from 'react';
 import Counter from '../containers/Counter';
 import Cart from '../containers/Cart/Cart';
+import Appointment1 from '../containers/Appointment/Appointment1';
+// import Appointment from '../containers/Appointment/Appointment(2)';
 
 
 function Userroute(props) {
@@ -43,9 +45,10 @@ function Userroute(props) {
                 <Route exact path='/counter' element={<Counter />} />
                 <Route exact path='/contact' element={<Contact />} />
 
-                <Route element={<PrivateRoute />}>
-                    <Route exact path='/appointment' element={<Appointment />} />
-                </Route>
+                {/* <Route element={<PrivateRoute />}> */}
+                    <Route exact path='/appointment' element={<Appointment1/>} />
+                    
+                {/* </Route> */}
 
                 <Route exact path='/auth' element={<Auth />} />
                 <Route exact path='/cart' element={<Cart />} />

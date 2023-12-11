@@ -6,7 +6,7 @@ import { InputBox, InputError } from '../../component/UI/Inpurbox/Inputbox.style
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { toBeEnabled } from '@testing-library/jest-dom/matchers';
-import { loginReqwest, signupReqwest, signupreqwest } from '../../reducx/action/auth.action';
+import { forgetReqwest, loginReqwest, signupReqwest, signupreqwest } from '../../reducx/action/auth.action';
 import { useDispatch } from 'react-redux';
 
 function Auth(props) {
@@ -65,6 +65,11 @@ function Auth(props) {
         dispatch(loginReqwest(data))
     }
 
+    const handleforget = (data) => {
+        console.log(data);
+        dispatch(forgetReqwest(data))
+    }
+
     const formikobj = useFormik({
 
         initialValues: inival,
@@ -75,13 +80,15 @@ function Auth(props) {
                 handlelogin(values)
             } else if(type === 'signup'){
                 handlesignup(values)
+            } else {
+                handleforget(values)
             }
         },
         enableReinitialize: true
     })
 
     const { handleChange, handleBlur, handleSubmit, errors, values, touched } = formikobj;
-    console.log(errors);
+    // console.log(errors);
 
     // const StyledButton = styled.button`
     //     display: block;
