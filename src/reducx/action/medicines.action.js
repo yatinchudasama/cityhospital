@@ -14,7 +14,7 @@ export const getmedicines = () => (dispatch) => {
             getMedicinesData()
                 .then(response => dispatch({ type: GET_MEDICINES, payload: response.data }))
 
-                .catch(error => dispatch(errormedicines(error)))
+                .catch(error => dispatch(errormedicines(error)))    
                 .then((response) => console.log(response.data))
             // fetch(API_URL + "medicines")
             //     .then(response => {
@@ -52,11 +52,10 @@ export const deletemedicines = (id) => (dispatch) => {
 export const addmedicines = (data) => async (dispatch) => {
     console.log(data);
     try {
-        const docRef = await addDoc(collection(db, "users"), {
-            first: "Ada",
-            last: "Lovelace",
-            born: 1815
-          });
+        const docRef = await addDoc(collection(db, "medicines"), data);
+
+        dispatch({ type: ADD_MEDICINES, payload: {...data, id:docRef.id} })
+
           console.log("Document written with ID: ", docRef.id);
         // addMedicinesData(data)
         //     .then(response => dispatch({ type: ADD_MEDICINES, payload: response.data }))

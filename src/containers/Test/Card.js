@@ -29,9 +29,7 @@ function Card({ id = '', title = '', subtitle = '', btnvalue = '', btnClick = ''
                     }
                    
                 </Badge>
-                {
-
-                }
+                
 
                 {
                     btnvalue ? <Button onClick={btnClick}>{btnvalue}</Button> : null

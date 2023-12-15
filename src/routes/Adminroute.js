@@ -10,11 +10,11 @@ function Adminroute(props) {
     return (
         <Layout>
             <Routes>
-                <Route element={<PrivateRoute />}>
+                {/* <Route element={<PrivateRoute />}> */}
                     <Route exact path="/medisin" element={<Medisin />} />
                     <Route exact path='/doctor' element={<Doctor/>} />
                     <Route exact path='/todo' element={<Todo/>} />
-                </Route>
+                {/* </Route> */}
 
             </Routes>
         </Layout>

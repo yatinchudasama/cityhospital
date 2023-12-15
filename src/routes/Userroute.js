@@ -22,6 +22,7 @@ import Counter from '../containers/Counter';
 import Cart from '../containers/Cart/Cart';
 import Appointment1 from '../containers/Appointment/Appointment1';
 // import Appointment from '../containers/Appointment/Appointment(2)';
+import Example from '../containers/Example/Example';
 
 
 function Userroute(props) {
@@ -42,8 +43,9 @@ function Userroute(props) {
                 <Route exact path='/medisineslist/:id' element={<MedisinData />} />
                 <Route exact path='/about' element={<About />} />
 
-                <Route exact path='/counter' element={<Counter />} />
+                <Route exact path='/counter' element={<Counter/>} />
                 <Route exact path='/contact' element={<Contact />} />
+                <Route exact path='/example' element={<Example/>} />
 
                 {/* <Route element={<PrivateRoute />}> */}
                     <Route exact path='/appointment' element={<Appointment1/>} />

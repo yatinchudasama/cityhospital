@@ -116,8 +116,6 @@ export const deletAPTdata = createAsyncThunk(
             console.log(error);
         });
 
-
-
         return data.id;
 
     }
@@ -152,20 +150,13 @@ export const updateAPTdata = createAsyncThunk(
             const rno = Math.floor(Math.random() * 100000);
             const storageRef = ref(storage, 'appointment/' + rno + "_" + data.file.name);
 
-
-            // 'file' comes from the Blob or File API
-
             await uploadBytes(storageRef, data.file).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
                 await getDownloadURL(snapshot.ref)
                     .then(async (url) => {
                         console.log(url);
                         try {
-                            const docRef = await addDoc(collection(db, "users"), {
-                                first: "Ada",
-                                last: "Lovelace",
-                                born: 1815
-                            });
+                            const docRef = await addDoc(collection(db, "users"));
                             console.log("Document written with ID: ", docRef.id);
                         } catch (e) {
                             console.error("Error adding document: ", e);
@@ -179,7 +170,7 @@ export const updateAPTdata = createAsyncThunk(
                     })
                 console.log(aptdata);
             })
-                .catch((error) => console.log(error))
+            .catch((error) => console.log(error))
 
         }
 

@@ -8,11 +8,6 @@ import { signupReducer } from "./auth.reducer";
 import alertSlice from "../../slice/alert.slice";
 import  aptSlice  from "../../slice/appointment.slice";
 
-
-
-
-
-
 export const rootReduce = combineReducers({
     counetr: counterReducer,
     medisines: medisinReducer,
