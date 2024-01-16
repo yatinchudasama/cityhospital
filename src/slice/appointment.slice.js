@@ -104,13 +104,16 @@ export const deletAPTdata = createAsyncThunk(
     // }
 
     async (data) => {
+        console.log(data);
 
         // Create a reference to the file to delete
         const desertRef = ref(storage, 'appointment/' + data.file_name);
+        console.log(desertRef);
 
         // Delete the file
         await deleteObject(desertRef).then(async (data) => {
             await deleteDoc(doc(db, "appointment", data.id));
+            console.log(data.id);
 
         }).catch((error) => {
             console.log(error);

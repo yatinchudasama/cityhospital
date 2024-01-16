@@ -33,12 +33,12 @@ function Header({ countCard, fav }) {
         console.log('yyyyyyyy');
     }
 
-    // let qty = 0;
-    // {
-    //     cart.cart.map((v) => {
-    //         qty = qty + v.qty
-    //     })
-    // }
+    let qty = 0;
+    {
+        cart.cart.map((v) => {
+            qty = qty + v.qty
+        })
+    }
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">

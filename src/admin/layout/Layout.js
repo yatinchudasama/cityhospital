@@ -103,7 +103,8 @@ export default function Doctor({ children }) {
 
     const Iconlist = [
         {lable:"Medisin", icon:<MedicationIcon/>, to: "/admin/Medisin"},
-        {lable:"Doctor", icon:<LocalHospitalIcon/>, to: "/admin/doctor"}
+        {lable:"Doctor", icon:<LocalHospitalIcon/>, to: "/admin/doctor"},
+        {lable:"Todo", icon:<LocalHospitalIcon/>, to: "/admin/todo"}
     ]
 
     return (

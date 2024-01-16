@@ -131,11 +131,11 @@ export const medisinSlice = createSlice({
         builder.addCase(updatemedicines.fulfilled, (state, action) => {
             console.log(action);
 
-            state.medisines = state.medisines.map((V) => {
-                if(V.id === action.payload.id) {
+            state.medisines = state.medisines.map((v) => {
+                if(v.id === action.payload.id) {
                     return action.payload;
                 } else {
-                    return V;
+                    return v;
                 }
             })
         })

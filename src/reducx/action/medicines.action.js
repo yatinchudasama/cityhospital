@@ -3,7 +3,7 @@ import { API_URL } from "../../utils/baseURL";
 import { ADD_MEDICINES, DELETE_MEDICINES, ERROR_MEDICINES, GET_MEDICINES, LODING_MEDICINES, UPDATE_MEDICINES } from "../ActionType";
 import { addMedicinesData, deletMedicinesData, getMedicinesData } from "../../common/api/medicines.api";
 import { putRequest } from "../../common/request";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 
@@ -14,7 +14,7 @@ export const getmedicines = () => (dispatch) => {
             getMedicinesData()
                 .then(response => dispatch({ type: GET_MEDICINES, payload: response.data }))
 
-                .catch(error => dispatch(errormedicines(error)))    
+                .catch(error => dispatch(errormedicines(error)))
                 .then((response) => console.log(response.data))
             // fetch(API_URL + "medicines")
             //     .then(response => {
@@ -54,21 +54,21 @@ export const addmedicines = (data) => async (dispatch) => {
     try {
         const docRef = await addDoc(collection(db, "medicines"), data);
 
-        dispatch({ type: ADD_MEDICINES, payload: {...data, id:docRef.id} })
+        dispatch({ type: ADD_MEDICINES, payload: { ...data, id: docRef.id } })
 
-          console.log("Document written with ID: ", docRef.id);
-        // addMedicinesData(data)
-        //     .then(response => dispatch({ type: ADD_MEDICINES, payload: response.data }))
-        //     .catch((error) => console.log(error))
-        // fetch(API_URL + "medicines", {
-        //     method: "POST",
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(data)
+        console.log("Document written with ID: ", docRef.id);
+        addMedicinesData(data)
+            .then(response => dispatch({ type: ADD_MEDICINES, payload: response.data }))
+            .catch((error) => console.log(error))
+        fetch(API_URL + "medicines", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
 
-        // })
-        //     .then(response => response.json())
-        //     .then(rdata => dispatch({ type: ADD_MEDICINES, payload: rdata }))
-        //     .catch((error) => console.log(error))
+        })
+            .then(response => response.json())
+            .then(rdata => dispatch({ type: ADD_MEDICINES, payload: rdata }))
+            .catch((error) => console.log(error))
     } catch (error) {
         console.log(error);
     }

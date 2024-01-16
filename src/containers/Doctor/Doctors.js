@@ -1,8 +1,11 @@
 import React from 'react';
 import { Heading } from '../../component/UI/Heading/Heading';
 import { DHeadin4 } from '../../component/UI/Heading/Heading';
+import { useSelector } from 'react-redux';
 
 function Doctors(props) {
+    const doctor = useSelector(state => state.doctor)
+    console.log(doctor);
     return (
         <main>
             <section id="doctors" className="doctors">

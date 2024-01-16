@@ -100,31 +100,32 @@ function Medisin({ increment, fav, setFav }) {
     const handalsearchSort = () => {
         console.log('yyyy');
 
-        let localData = JSON.parse(localStorage.getItem("medisin"));
+        // let localData = JSON.parse(localStorage.getItem("medisin"));
         // console.log(localData);
 
-        let Data = localData.filter((v) => {
-            return (
-                v.name.toLowerCase().includes(search.toLowerCase()) ||
-                v.price.toString().includes(search.toString())
-            )
+        // let Data = localData.filter((v) => {
+        //     console.log(v);
+        //     return (
+        //         v.name.toLowerCase().includes(search.toLowerCase()) ||
+        //         v.price.toString().includes(search.toString())
+        //     )
 
-        })
+        // })
 
-        Data = Data.sort((a, b) => {
-            if (sort === 'az') {
-                return a.name.localeCompare(b.name)
-            } else if (sort === 'za') {
-                return b.name.localeCompare(a.name)
-            } else if (sort === 'low') {
-                return a.price - b.price;
-            } else if (sort === 'high') {
-                return b.price - a.price;
-            }
-        })
-        console.log(Data);
+        // Data = Data.sort((a, b) => {
+        //     if (sort === 'az') {
+        //         return a.name.localeCompare(b.name)
+        //     } else if (sort === 'za') {
+        //         return b.name.localeCompare(a.name)
+        //     } else if (sort === 'low') {
+        //         return a.price - b.price;
+        //     } else if (sort === 'high') {
+        //         return b.price - a.price;
+        //     }
+        // })
+        // console.log(Data);
 
-        return Data
+        // return Data
     }
 
     const finalData = handalsearchSort()
@@ -155,8 +156,8 @@ function Medisin({ increment, fav, setFav }) {
         <div className='container'>
             <br></br><br></br>
             {
-                medisines.isLoding ? <CircularProgress /> :
-                medisines.error ? <p>{medisines.error}</p> :
+                // medisines.isLoding ? <CircularProgress /> :
+                // medisines.error ? <p>{medisines.error}</p> :
                 
                     medisines.medisines.map((v) => {
                         <>

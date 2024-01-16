@@ -54,6 +54,7 @@ function Userroute(props) {
 
                 <Route exact path='/auth' element={<Auth />} />
                 <Route exact path='/cart' element={<Cart />} />
+                
 
             </Routes>
             <Footer />

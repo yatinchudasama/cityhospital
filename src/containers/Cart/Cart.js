@@ -10,11 +10,11 @@ function Cart(props) {
 
     const cart = useSelector(state => state.cart)
     console.log(medisines, cart);
+    console.log(cart);
 
     const cartData = cart.cart.map((v) => {
         let med = medisines.medisines.find((m) => v.id == m.id)
-
-
+        
         return { ...med, qty: v.qty }
 
     })
