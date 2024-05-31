@@ -19,7 +19,8 @@ import Header from '../component/Header/Header';
 import Footer from '../component/Footer/Footer';
 import { useState } from 'react';
 import Counter from '../containers/Counter';
-
+import Form from '../containers/Form/Form'
+import Display from '../containers/Display/Display';
 
 function Userroute(props) {
     const [countCard, setCountCard] = useState('')
@@ -41,6 +42,8 @@ function Userroute(props) {
 
                 <Route exact path='/counter' element={<Counter />} />
                 <Route exact path='/contact' element={<Contact />} />
+                <Route exact path='/form' element={<Form />} />
+                <Route exact path='/display' element={<Display />} />
 
                 <Route element={<PrivateRoute />}>
                     <Route exact path='/appointment' element={<Appointment />} />
